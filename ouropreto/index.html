@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Ouro Preto · Set 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --stone-deep: #1E1B14;
+  --stone-mid: #2E2A1F;
+  --stone: #4A4435;
+  --parch: #F0EAD6;
+  --parch-light: #FAF6EE;
+  --gold: #B8960C;
+  --gold-light: #D4AF37;
+  --gold-pale: #F5E9B0;
+  --verdigris: #3D6B50;
+  --verdigris-light: #E8F2EC;
+  --rust: #8B3A2A;
+  --rust-light: #FAE8E5;
+  --muted: #7A6E58;
+  --ink: #211E17;
+  --cash-bg: #FFF7E0;
+  --cash-border: #D4A017;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--parch);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── TICKER ── */
+.ticker {
+  background: var(--gold);
+  color: var(--stone-deep);
+  padding: 7px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  animation: tick 25s linear infinite;
+}
+@keyframes tick {
+  from { transform: translateX(100vw); }
+  to { transform: translateX(-100%); }
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--stone-deep);
+  padding: 40px 22px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 90% 10%, rgba(184,150,12,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 5% 85%, rgba(61,107,80,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 11vw, 68px);
+  font-weight: 900;
+  line-height: 0.9;
+  color: var(--parch);
+  letter-spacing: -1px;
+  margin-bottom: 6px;
+}
+.hero-title span {
+  display: block;
+  font-style: italic;
+  color: var(--gold-light);
+}
+.hero-sub {
+  font-size: 12px;
+  color: rgba(240,234,214,0.5);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+}
+.hero-names {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.hero-names span {
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(240,234,214,0.08);
+  border: 1px solid rgba(240,234,214,0.18);
+  padding: 5px 13px;
+  border-radius: 20px;
+  color: var(--parch);
+}
+
+/* ── FLIGHT BAND ── */
+.flight-band {
+  background: var(--stone-mid);
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(240,234,214,0.07);
+}
+.flight-legs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.flight-leg {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+}
+.leg-label {
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(240,234,214,0.35);
+  margin-bottom: 2px;
+}
+.iata { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold-light); line-height:1; }
+.city { font-size: 9px; color: rgba(240,234,214,0.4); margin-top: 1px; }
+.time { font-size: 11px; font-weight: 600; color: rgba(240,234,214,0.8); margin-top: 2px; }
+.leg-right { text-align: right; }
+.leg-mid { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.leg-line { width: 50px; height: 1px; background: linear-gradient(90deg, rgba(240,234,214,0.15), var(--gold), rgba(240,234,214,0.15)); position: relative; }
+.leg-plane { font-size: 11px; }
+.leg-voo { font-size: 8px; color: rgba(240,234,214,0.3); letter-spacing: 1px; }
+.flight-sep { height: 1px; background: rgba(240,234,214,0.07); margin: 2px 0; }
+.flight-alert {
+  margin-top: 12px;
+  background: rgba(184,150,12,0.12);
+  border: 1px solid rgba(184,150,12,0.25);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 10px;
+  color: var(--gold-light);
+  line-height: 1.4;
+}
+.res-code {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(240,234,214,0.25);
+  text-align: center;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+/* ── TABS ── */
+.tabs-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--stone-deep);
+  border-bottom: 1px solid rgba(240,234,214,0.08);
+}
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: 0 0 auto;
+  padding: 13px 16px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: rgba(240,234,214,0.35);
+  cursor: pointer;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.tab.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+/* ── CONTENT ── */
+.content { padding-bottom: 60px; }
+.panel { display: none; }
+.panel.active { display: block; animation: up 0.25s ease; }
+@keyframes up { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── DAY CARDS ── */
+.day-card {
+  margin: 14px 14px 0;
+  background: var(--parch-light);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(30,27,20,0.07);
+}
+.day-head {
+  padding: 18px 18px 14px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.day-num {
+  position: absolute;
+  right: 14px; top: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--stone-deep);
+  opacity: 0.05;
+  line-height: 1;
+  pointer-events: none;
+}
+.day-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.day-weekday { font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 3px; }
+.day-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.day-badge {
+  font-size: 8px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  letter-spacing: 0.5px;
+}
+.badge-free { background: var(--verdigris-light); color: var(--verdigris); }
+.badge-paid { background: var(--gold-pale); color: #7a6000; }
+.badge-info { background: #e8eef5; color: #2d4a6b; }
+.day-chevron { font-size: 12px; color: var(--muted); transition: transform 0.3s; flex-shrink: 0; margin-top: 4px; }
+.day-card.open .day-chevron { transform: rotate(180deg); }
+.day-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(30,27,20,0.07); }
+.day-tag { font-size: 9px; background: var(--parch); color: var(--muted); padding: 3px 9px; border-radius: 8px; font-weight: 500; }
+.day-body { display: none; padding: 4px 18px 18px; }
+.day-card.open .day-body { display: block; animation: up 0.2s ease; }
+
+/* ── STOPS ── */
+.stop {
+  display: flex;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(30,27,20,0.06);
+}
+.stop:last-child { border-bottom: none; }
+.stop-time-col { width: 42px; flex-shrink: 0; padding-top: 3px; }
+.stop-time { font-size: 11px; font-weight: 700; color: var(--rust); }
+.stop-time.sunset { color: var(--gold); }
+.stop-dot-col { width: 18px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; padding-top: 5px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.dot-free { background: var(--verdigris); box-shadow: 0 0 0 2px var(--verdigris-light); }
+.dot-paid { background: var(--gold); box-shadow: 0 0 0 2px var(--gold-pale); }
+.dot-info { background: #5a8ab0; box-shadow: 0 0 0 2px #e0eaf4; }
+.dot-sunset { background: var(--gold-light); box-shadow: 0 0 0 2px #fff3c0; }
+.dot-drive { background: var(--stone); box-shadow: 0 0 0 2px #e8e5de; }
+.dot-line { width: 1px; flex: 1; background: rgba(30,27,20,0.08); margin-top: 5px; min-height: 18px; }
+.stop-content { flex: 1; min-width: 0; }
+.stop-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.2; }
+.stop-badges { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 5px; }
+.sbadge {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+.sb-free { background: var(--verdigris-light); color: var(--verdigris); }
+.sb-paid { background: var(--gold-pale); color: #7a6000; }
+.sb-cash { background: var(--cash-bg); color: #8B6914; }
+.sb-drive { background: #e8e5de; color: var(--stone); }
+.sb-park { background: #e0eaf4; color: #2d4a6b; }
+.sb-warn { background: var(--rust-light); color: var(--rust); }
+.sb-sun { background: #fff3c0; color: #8B7000; }
+.stop-note { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.stop-alert {
+  margin-top: 7px;
+  background: var(--cash-bg);
+  border-left: 3px solid var(--gold);
+  padding: 7px 10px;
+  border-radius: 0 6px 6px 0;
+  font-size: 10px;
+  color: #6b5200;
+  line-height: 1.4;
+}
+.stop-alert.warn {
+  background: var(--rust-light);
+  border-left-color: var(--rust);
+  color: #6b1e10;
+}
+.park-tip {
+  margin-top: 7px;
+  background: #e0eaf4;
+  border-left: 3px solid #5a8ab0;
+  padding: 6px 10px;
+  border-radius: 0 6px 6px 0;
+  font-size: 10px;
+  color: #1e3a55;
+  line-height: 1.4;
+}
+
+/* ── RESERVAS PANEL ── */
+.res-section { padding: 14px 14px 0; display: flex; flex-direction: column; gap: 12px; }
+.res-card {
+  background: var(--parch-light);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(30,27,20,0.07);
+}
+.res-header {
+  padding: 16px 18px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(30,27,20,0.07);
+}
+.res-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.ri-latam { background: #e8eef5; }
+.ri-airbnb { background: #fce8e6; }
+.ri-car { background: #e8f2ec; }
+.res-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+.res-sub { font-size: 10px; color: var(--muted); margin-top: 1px; }
+.res-status {
+  margin-left: auto;
+  font-size: 8px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 10px;
+  background: var(--verdigris-light);
+  color: var(--verdigris);
+  flex-shrink: 0;
+}
+.res-body { padding: 14px 18px; }
+.res-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(30,27,20,0.05);
+  gap: 8px;
+}
+.res-row:last-child { border-bottom: none; }
+.res-label { font-size: 10px; color: var(--muted); flex-shrink: 0; }
+.res-value { font-size: 11px; font-weight: 600; color: var(--ink); text-align: right; }
+.res-alert {
+  background: var(--cash-bg);
+  border: 1px solid rgba(212,160,23,0.3);
+  border-radius: 8px;
+  padding: 9px 12px;
+  margin-top: 10px;
+  font-size: 10px;
+  color: #6b5200;
+  line-height: 1.5;
+}
+.res-alert.red {
+  background: var(--rust-light);
+  border-color: rgba(139,58,42,0.25);
+  color: #6b1e10;
+}
+
+/* ── INGRESSOS PANEL ── */
+.ing-section { padding: 14px 14px 0; }
+.cash-alert {
+  background: var(--cash-bg);
+  border: 2px solid var(--cash-border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.cash-icon { font-size: 22px; flex-shrink: 0; }
+.cash-title { font-size: 13px; font-weight: 700; color: #6b5200; margin-bottom: 3px; }
+.cash-text { font-size: 11px; color: #8B6914; line-height: 1.5; }
+.ing-group-label {
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  margin: 18px 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ing-group-label::after { content: ''; flex: 1; height: 1px; background: rgba(30,27,20,0.1); }
+.ing-card {
+  background: var(--parch-light);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 10px rgba(30,27,20,0.06);
+  margin-bottom: 8px;
+}
+.ing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(30,27,20,0.05);
+  gap: 8px;
+}
+.ing-row:last-child { border-bottom: none; }
+.ing-name { font-size: 12px; color: var(--ink); line-height: 1.3; flex: 1; }
+.ing-name small { display: block; font-size: 9px; color: var(--muted); font-weight: 400; }
+.ing-prices { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; }
+.ing-full { font-size: 11px; font-weight: 600; color: var(--ink); }
+.ing-half { font-size: 9px; color: var(--verdigris); font-weight: 600; }
+.ing-free { font-size: 11px; font-weight: 700; color: var(--verdigris); }
+.ing-total-card {
+  background: var(--stone-deep);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 14px;
+  color: var(--parch);
+}
+.ing-total-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(240,234,214,0.4); margin-bottom: 6px; }
+.ing-total-top { display: flex; justify-content: space-between; align-items: baseline; }
+.ing-total-num { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; color: var(--parch); }
+.ing-total-note { font-size: 10px; color: rgba(240,234,214,0.5); margin-top: 8px; }
+.ing-breakdown {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(240,234,214,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ing-br-row { display: flex; justify-content: space-between; font-size: 10px; }
+.ing-br-label { color: rgba(240,234,214,0.55); }
+.ing-br-val { color: rgba(240,234,214,0.85); font-weight: 600; }
+
+/* ── DICAS PANEL ── */
+.dicas-grid { padding: 14px 14px 0; display: flex; flex-direction: column; gap: 10px; }
+.dica-card {
+  background: var(--parch-light);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 10px rgba(30,27,20,0.06);
+}
+.dica-head { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; }
+.dica-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.di-gold { background: var(--gold-pale); }
+.di-green { background: var(--verdigris-light); }
+.di-blue { background: #e0eaf4; }
+.di-red { background: var(--rust-light); }
+.di-stone { background: #e8e5de; }
+.dica-title { font-size: 13px; font-weight: 700; color: var(--ink); }
+.dica-sub { font-size: 10px; color: var(--muted); }
+.dica-list { list-style: none; }
+.dica-list li {
+  font-size: 11px;
+  color: #3d3525;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(30,27,20,0.05);
+  display: flex;
+  gap: 7px;
+  line-height: 1.5;
+}
+.dica-list li:last-child { border-bottom: none; }
+.dica-list li::before { content: '→'; color: var(--gold); font-size: 10px; margin-top: 2px; flex-shrink: 0; }
+
+/* ── CHECKLIST PANEL ── */
+.check-section { padding: 14px 14px 0; display: flex; flex-direction: column; gap: 10px; }
+.check-card { background: var(--parch-light); border-radius: 12px; padding: 16px; box-shadow: 0 1px 10px rgba(30,27,20,0.06); }
+.check-title { font-size: 13px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 7px; color: var(--ink); }
+.check-item { display: flex; align-items: flex-start; gap: 11px; padding: 9px 0; border-bottom: 1px solid rgba(30,27,20,0.05); cursor: pointer; transition: opacity 0.15s; }
+.check-item:last-child { border-bottom: none; }
+.check-item.done { opacity: 0.38; }
+.check-item.done .check-text { text-decoration: line-through; }
+.check-box { width: 19px; height: 19px; border-radius: 5px; border: 1.5px solid rgba(30,27,20,0.2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; transition: all 0.15s; margin-top: 1px; }
+.check-item.done .check-box { background: var(--verdigris); border-color: var(--verdigris); color: white; }
+.check-text { font-size: 12px; line-height: 1.4; color: var(--ink); }
+.check-text small { display: block; font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+.bottom-safe { height: 30px; }
+</style>
+</head>
+<body>
+
+<div class="ticker">
+  <span class="ticker-inner">✈ LATAM · NFXJHR · 4 VIAJANTES · OURO PRETO · 24–28 SETEMBRO 2026 · RESERVA CONFIRMADA · CARRO LOCALIZA RKV1QQ · AIRBNB HM9WA84K39 ✈ LATAM · NFXJHR · 4 VIAJANTES · OURO PRETO · 24–28 SETEMBRO 2026</span>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Roteiro de Viagem · Minas Gerais</div>
+  <div class="hero-title">Ouro<span>Preto</span></div>
+  <div class="hero-sub">24 – 28 de Setembro de 2026 · 5 dias · 4 adultos</div>
+  <div class="hero-names">
+    <span>👩 Josiane</span>
+    <span>👨 Luis</span>
+    <span>👩 Eliete</span>
+    <span>👩 Mara</span>
+  </div>
+</div>
+
+<div class="flight-band">
+  <div class="flight-legs">
+    <div class="flight-leg">
+      <div>
+        <div class="leg-label">Ida · 24/09</div>
+        <div class="iata">POA</div>
+        <div class="city">Porto Alegre</div>
+        <div class="time">10:00</div>
+      </div>
+      <div class="leg-mid">
+        <div class="leg-plane">✈</div>
+        <div class="leg-line"></div>
+        <div class="leg-voo">LA3155 + LA3916</div>
+      </div>
+      <div class="leg-right">
+        <div class="leg-label" style="text-align:right">Chegada Confins</div>
+        <div class="iata">CNF</div>
+        <div class="city" style="text-align:right">Belo Horizonte</div>
+        <div class="time" style="text-align:right">14:35</div>
+      </div>
+    </div>
+    <div class="flight-sep"></div>
+    <div class="flight-leg">
+      <div>
+        <div class="leg-label">Volta · 28/09</div>
+        <div class="iata">CNF</div>
+        <div class="city">Belo Horizonte</div>
+        <div class="time">16:20</div>
+      </div>
+      <div class="leg-mid">
+        <div class="leg-plane">✈</div>
+        <div class="leg-line"></div>
+        <div class="leg-voo">LA3933 + LA3162</div>
+      </div>
+      <div class="leg-right">
+        <div class="leg-label" style="text-align:right">Chegada POA</div>
+        <div class="iata">POA</div>
+        <div class="city" style="text-align:right">Porto Alegre</div>
+        <div class="time" style="text-align:right">20:50</div>
+      </div>
+    </div>
+  </div>
+  <div class="flight-alert">⚠️ Conexão em Congonhas: 1h45 — mesmo aeroporto, sem estresse. · ⚠️ Tarifa Light: sem bagagem despachada. 1 mala de mão (12kg) + 1 item pessoal (10kg) por pessoa.</div>
+  <div class="res-code">Reserva NFXJHR · LA9578405PDVO</div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('roteiro',this)">📅 Roteiro</button>
+    <button class="tab" onclick="showTab('reservas',this)">📋 Reservas</button>
+    <button class="tab" onclick="showTab('ingressos',this)">💰 Ingressos</button>
+    <button class="tab" onclick="showTab('dicas',this)">💡 Dicas</button>
+    <button class="tab" onclick="showTab('checklist',this)">✅ Checklist</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══ ROTEIRO ══ -->
+<div id="panel-roteiro" class="panel active">
+
+  <!-- DIA 1 -->
+  <div class="day-card open" id="d1">
+    <div class="day-head" onclick="toggleDay('d1')">
+      <div class="day-num">24</div>
+      <div class="day-row">
+        <div><div class="day-weekday">Quinta-feira · 24 de Setembro</div><div class="day-title">Chegada em Ouro Preto</div></div>
+        <div class="day-badge badge-info">Chegada</div>
+        <div class="day-chevron">▼</div>
+      </div>
+      <div class="day-tags">
+        <span class="day-tag">✈ Pousa 14h35</span>
+        <span class="day-tag">🚗 ~2h de estrada</span>
+        <span class="day-tag">🌙 Passeio noturno</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">14h35</div></div>
+        <div class="stop-dot-col"><div class="dot dot-info"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">✈ Pousa em Confins (CNF)</div>
+          <div class="stop-badges"><span class="sbadge sb-drive">🚗 Localiza</span></div>
+          <div class="stop-note">Desembarque → Localiza no aeroporto (ref. RKV1QQ, localizador AV33ZZDF6A). Levar CNH e cartão de crédito FÍSICOS. Pré-autorização de ~R$700 no cartão.</div>
+          <div class="stop-alert">⚠️ Horário do voucher é 14h30 — você chega às 14h35. Ligue antes se atrasar: Azul Viagens 4003-1181</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">~15h15</div></div>
+        <div class="stop-dot-col"><div class="dot dot-drive"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🚗 Estrada para Ouro Preto</div>
+          <div class="stop-badges"><span class="sbadge sb-drive">~115km · ~1h45</span></div>
+          <div class="stop-note">Rota recomendada: BR-040 → BR-356 (Rodovia dos Inconfidentes). GPS para "R. Maciel, 680, Ouro Preto". Nas ladeiras de entrada da cidade, use 1ª ou 2ª marcha — o Mobi é pequeno, não force a embreagem.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">~17h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-info"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🏠 Check-in — Airbnb R. Maciel, 680</div>
+          <div class="stop-badges"><span class="sbadge sb-warn">Avisar Valdenize</span></div>
+          <div class="stop-note">Check-in a partir das 15h, anfitrião recebe pessoalmente. Avise Valdenize pelo app Airbnb quando sair de Confins para ela aguardar.</div>
+          <div class="park-tip">🅿️ Deixe o carro no próprio espaço do Airbnb — a Praça Tiradentes fica a poucos minutos a pé daqui.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">~18h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-sunset"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🌆 Praça Tiradentes à noite</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Gratuito</span><span class="sbadge sb-sun">Noturno</span></div>
+          <div class="stop-note">Passeio leve à noite — o casario colonial iluminado é encantador. Jantar em um dos restaurantes ao redor da praça. Peça frango com quiabo ou feijão-tropeiro para estrear a culinária mineira.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DIA 2 -->
+  <div class="day-card" id="d2">
+    <div class="day-head" onclick="toggleDay('d2')">
+      <div class="day-num">25</div>
+      <div class="day-row">
+        <div><div class="day-weekday">Sexta-feira · 25 de Setembro</div><div class="day-title">Centro Histórico</div></div>
+        <div class="day-badge badge-paid">~R$93 / 4 pax</div>
+        <div class="day-chevron">▼</div>
+      </div>
+      <div class="day-tags">
+        <span class="day-tag">⛪ 5 igrejas</span>
+        <span class="day-tag">🏛️ 2 museus grátis</span>
+        <span class="day-tag">🌅 Pôr do sol</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">9h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-paid"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">⛪ Basílica N.S. do Pilar</div>
+          <div class="stop-badges"><span class="sbadge sb-paid">R$10 · Meia R$5</span><span class="sbadge sb-warn">Fecha 11h!</span></div>
+          <div class="stop-note">Interior com 300kg de ouro — uma das mais ricas do Brasil. Cheguem antes das 11h pois fecha ao meio-dia. Abre novamente às 12h.</div>
+          <div class="park-tip">🅿️ Estacionamento próximo à Basílica do Pilar — área das Jardineiras (jardineiras turísticas saem dali). Deixe o carro aqui para o cluster da manhã.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">10h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-paid"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">⛪ Igreja São Francisco de Assis</div>
+          <div class="stop-badges"><span class="sbadge sb-paid">R$8 · Meia R$4</span></div>
+          <div class="stop-note">Obra-prima de Aleijadinho — fachada esculpida em pedra-sabão e teto pintado por Mestre Ataíde. 5 min a pé da Basílica do Pilar. Na calçada da frente fica a Feira de Pedra-Sabão — artesanato local, não perca!</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">11h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-paid"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">⛪ Igreja Santa Efigênia</div>
+          <div class="stop-badges"><span class="sbadge sb-paid">R$5 · Meia R$2,50</span><span class="sbadge sb-drive">🚗 Subir de carro</span></div>
+          <div class="stop-note">Igreja dos escravizados, construída com ouro escondido nos cabelos. Historia de Chico Rei. Vista linda da cidade do adro. Ladeira muito íngreme — subir de carro, não a pé com os pais.</div>
+          <div class="park-tip">🅿️ Há um espaço para parar em frente à igreja. Curta e depois desça de volta ao centro.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">12h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-info"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🍽️ Almoço no centro</div>
+          <div class="stop-note">Vários restaurantes na região de São Francisco / Praça Tiradentes. Peça tutu à mineira, frango com quiabo ou qualquer prato mineiro que aparecer.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">13h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-free"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🏛️ Museu Casa dos Contos</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Gratuito</span><span class="sbadge sb-warn">Fecha domingos!</span></div>
+          <div class="stop-note">História do ouro e da administração colonial. Rua São José, 12. Funciona seg-sáb 10h-16h — por isso está aqui na sexta e não no domingo.</div>
+          <div class="park-tip">🅿️ Mover o carro para próximo da Praça Tiradentes. Use o app "Rotativo Ouro Preto" para pagar na Zona Azul, ou estacionamento particular na Rua Direita / Rua Senador Rocha Lagoa.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">14h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-free"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🏛️ Museu da Inconfidência</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Gratuito</span></div>
+          <div class="stop-note">Na Praça Tiradentes, 139. Um dos museus mais importantes do Brasil — 4 mil peças sobre a Inconfidência Mineira. Reserve 1h-1h30. Abre ter-dom 10h-18h.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">17h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-sunset"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🌅 Mirante Morro São Sebastião</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Gratuito</span><span class="sbadge sb-drive">🚗 Apenas de carro</span><span class="sbadge sb-sun">Pôr do sol</span></div>
+          <div class="stop-note">O melhor pôr do sol de Ouro Preto — vista panorâmica de todo o casario histórico dourado pelo sol. Ladeira extremamente íngreme, impossível a pé para os pais.</div>
+          <div class="park-tip">🅿️ Estacione no platô do mirante — cabe alguns carros. Chegue com ~20 min de antecedência para garantir vaga.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DIA 3 -->
+  <div class="day-card" id="d3">
+    <div class="day-head" onclick="toggleDay('d3')">
+      <div class="day-num">26</div>
+      <div class="day-row">
+        <div><div class="day-weekday">Sábado · 26 de Setembro</div><div class="day-title">Mariana + Mina da Passagem</div></div>
+        <div class="day-badge badge-paid">~R$660-800 · 💵 Dinheiro!</div>
+        <div class="day-chevron">▼</div>
+      </div>
+      <div class="day-tags">
+        <span class="day-tag">⛏️ 2 Minas de ouro</span>
+        <span class="day-tag">🎨 Museu Arte Sacra</span>
+        <span class="day-tag">🏘️ Centro Mariana</span>
+        <span class="day-tag">🌅 2 Mirantes</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">9h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-paid"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">⛏️ Mina da Passagem — Mariana</div>
+          <div class="stop-badges"><span class="sbadge sb-paid">~R$200-240 · Meia ~R$100-120</span><span class="sbadge sb-cash">💵 SÓ DINHEIRO!</span></div>
+          <div class="stop-note">Desça 120m de carrinho inclinado até o lago subterrâneo. Uma das maiores minas de ouro abertas ao mundo. Visita guiada ~45-60 min. Pais (60+) têm meia-entrada com documento.</div>
+          <div class="stop-alert">💵 Confirme o preço atual antes de ir: mariana.minasdapassagem.com.br — NÃO aceitam Pix, cartão nem qualquer outra forma. Traga o valor exato em dinheiro. Banco mais próximo: centro de Ouro Preto (~12km). Não há caixa eletrônico na mina.</div>
+          <div class="park-tip">🅿️ Estacionamento próprio gratuito da Mina da Passagem. Fica entre Ouro Preto e Mariana, ~20min de carro.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">10h15</div></div>
+        <div class="stop-dot-col"><div class="dot dot-free"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🏘️ Centro Histórico de Mariana</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Gratuito</span></div>
+          <div class="stop-note">Catedral da Sé · Praça das Duas Igrejas (São Francisco + N.S. do Carmo) · Igreja do Rosário de Mariana · Capela Santo Antônio. Mariana é muito mais plana e tranquila que OP — ótimo para os pais caminharem sem esforço.</div>
+          <div class="park-tip">🅿️ Estacione próximo à Praça Minas Gerais — muito mais fácil que OP. Caminhe pelo centro a partir daqui.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">11h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-paid"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🎨 Museu Arquidiocesano de Arte Sacra</div>
+          <div class="stop-badges"><span class="sbadge sb-paid">R$15 · Meia R$7,50 (60+)</span></div>
+          <div class="stop-note">Rua Frei Durão, 49 — considerado o mais rico museu de arte sacra de Minas Gerais. Casa Capitular rococó do séc. XVIII com ~2.000 peças: obras de Aleijadinho, Mestre Ataíde, prataria, paramentos, joias. Funciona ter-sáb até 17h. Sem ladeiras, espaço amplo — ótimo para os pais.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">13h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-info"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🍽️ Almoço em Mariana</div>
+          <div class="stop-note">Almoço com calma ao redor da Praça Minas Gerais. Última parada em Mariana antes da volta para OP.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">14h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-sunset"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🌅 Mirante das Lajes — parada na volta</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Gratuito</span><span class="sbadge sb-sun">Vista linda</span></div>
+          <div class="stop-note">Rua Conselheiro Quintiliano — fica no caminho de Mariana para OP. Basta parar o carro na beira da estrada, 10 minutinhos para apreciar a vista do casario de Ouro Preto de um ângulo diferente do São Sebastião.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">14h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-paid"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">⛏️ Mina Chico Rei — Ouro Preto</div>
+          <div class="stop-badges"><span class="sbadge sb-paid">~R$25-50 · verificar meia 60+</span></div>
+          <div class="stop-note">Rua Dom Silvério, 108. A mina mais histórica e autêntica de OP — história do rei africano escravizado Chico Rei que comprou sua liberdade e a de toda sua família escondendo ouro nos cabelos. Visita guiada de ~40 min. Tem trechos para abaixar levemente, mas tranquilo para boa mobilidade. Aceita cartão. Abre todos os dias até 17h — chegue até 16h15.</div>
+          <div class="park-tip">🅿️ Rua Dom Silvério tem espaço para parar. Área próxima à Santa Efigênia.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">17h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-sunset"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🌅 Mirante Morro São Sebastião — pôr do sol</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Gratuito</span><span class="sbadge sb-drive">🚗 Subir de carro</span><span class="sbadge sb-sun">Pôr do sol</span></div>
+          <div class="stop-note">Encerra o sábado com o pôr do sol mais bonito de Ouro Preto. A mina fica pertinho — fácil de ir direto de lá. Subir de carro obrigatório.</div>
+          <div class="stop-alert">⚠️ Dia muito completo — se os pais estiverem cansados depois da Mina Chico Rei, pule o mirante e opte pelo descanso. O São Sebastião já está na sexta também.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DIA 4 -->
+  <div class="day-card" id="d4">
+    <div class="day-head" onclick="toggleDay('d4')">
+      <div class="day-num">27</div>
+      <div class="day-row">
+        <div><div class="day-weekday">Domingo · 27 de Setembro</div><div class="day-title">Museus + Rosário + Pôr do Sol</div></div>
+        <div class="day-badge badge-paid">R$24 / 4 pax</div>
+        <div class="day-chevron">▼</div>
+      </div>
+      <div class="day-tags">
+        <span class="day-tag">🙏 Museu do Oratório</span>
+        <span class="day-tag">⛪ Igreja do Rosário</span>
+        <span class="day-tag">🌅 Mirante das Mercês</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">9h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-paid"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🙏 Museu do Oratório</div>
+          <div class="stop-badges"><span class="sbadge sb-paid">R$8 · Meia R$4 (60+)</span></div>
+          <div class="stop-note">Um dos museus mais bonitos e bem cuidados de OP. Adro da Igreja do Carmo, centro. 162 oratórios e 300 imagens dos sécs. XVII-XX. Sem ladeiras, ambiente climatizado — perfeito para os pais. Abre qua-seg 9h30-17h30 (fechado às terças).</div>
+          <div class="park-tip">🅿️ Estacione próximo ao Adro da Igreja do Carmo — área central, perto da Rua Direita.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">12h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-free"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">⛪ Igreja N.S. do Rosário</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Gratuito</span></div>
+          <div class="stop-note">Formato oval único, construída pela irmandade dos negros escravizados. Abre domingos às 12h até 15h30 — por isso está aqui no domingo, não na sexta. Largo do Rosário.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">13h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-info"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🍽️ Almoço tranquilo</div>
+          <div class="stop-note">Aproveite para um almoço sem pressa — domingo em Ouro Preto tem muitos restaurantes abertos. Última tarde cheia antes do retorno.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">15h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-free"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🌿 Horto das Contas</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Gratuito</span><span class="sbadge sb-drive">🚗 De carro</span></div>
+          <div class="stop-note">Parque/mirante que oferece vistas de Ouro Preto de um ângulo diferente. Ideal para uma tarde tranquila antes do pôr do sol.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">17h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-sunset"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🌅 Mirante das Mercês</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Gratuito</span><span class="sbadge sb-sun">Pôr do sol</span></div>
+          <div class="stop-note">No muro do adro da Igreja N.S. das Mercês e Misericórdia — a 5 min do centro, acessível de carro. Encerrando a última tarde cheia com chave de ouro.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DIA 5 -->
+  <div class="day-card" id="d5">
+    <div class="day-head" onclick="toggleDay('d5')">
+      <div class="day-num">28</div>
+      <div class="day-row">
+        <div><div class="day-weekday">Segunda-feira · 28 de Setembro</div><div class="day-title">Compras + Aeroporto</div></div>
+        <div class="day-badge badge-info">Retorno · Voo 16h20</div>
+        <div class="day-chevron">▼</div>
+      </div>
+      <div class="day-tags">
+        <span class="day-tag">🧀 Aqui Di Minas</span>
+        <span class="day-tag">📦 Checkout 12h</span>
+        <span class="day-tag">✈ Voo 16h20</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">9h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-free"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">☕ Café da manhã</div>
+          <div class="stop-note">Último café da manhã em Ouro Preto. Aproveite com calma antes do checkout.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">9h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-free"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🧀 Aqui Di Minas Produtos Artesanais ⭐ 4.9</div>
+          <div class="stop-badges"><span class="sbadge sb-free">Entrada grátis</span></div>
+          <div class="stop-note">Rua Conde de Bobadela, 65A. Queijo Canastra curado · Doce de leite artesanal · Cachaça mineira · Café especial · Geleias · Mel. Degustação gratuita. ⚠️ Lembre da mala Light — sem espaço no porão!</div>
+          <div class="stop-alert">💡 Dica de embalagem: queijos curados e doce de leite cabem na mala de mão. Cachaças e vidros frágeis: embale bem com roupas. Só não leve líquidos acima de 100ml na bagagem de mão.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">12h</div></div>
+        <div class="stop-dot-col"><div class="dot dot-info"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">📦 Checkout — R. Maciel, 680</div>
+          <div class="stop-badges"><span class="sbadge sb-warn">Checkout até 12h</span></div>
+          <div class="stop-note">Confirme com Valdenize pelo app. Confira o apartamento, colete todos os pertences e certifique-se de devolver as chaves.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">12h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-drive"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🚗 Saída para Confins (via Pampulha)</div>
+          <div class="stop-badges"><span class="sbadge sb-drive">~115km · ~1h45</span></div>
+          <div class="stop-note">GPS para "Localiza Pampulha — Av. Prof. Magalhães Penido, 269". Chegue à locadora até 14h30 para a devolução no horário.</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">14h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-info"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">🚗 Devolução — Localiza Pampulha</div>
+          <div class="stop-badges"><span class="sbadge sb-warn">Devolver cheio de combustível!</span></div>
+          <div class="stop-note">Abasteça antes de devolver (política full-to-full). Av. Prof. Magalhães Penido, 269, Pampulha. Após devolução, Uber ou transfer até Confins (~20-30 min).</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">15h30</div></div>
+        <div class="stop-dot-col"><div class="dot dot-info"></div><div class="dot-line"></div></div>
+        <div class="stop-content">
+          <div class="stop-name">✈ Check-in — Voo LA3933 · Confins → Congonhas</div>
+          <div class="stop-badges"><span class="sbadge sb-warn">Voo às 16h20</span></div>
+          <div class="stop-note">Chegada em Congonhas 17h40 → Conexão → LA3162 19h10 → POA 20h50 🏠</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bottom-safe"></div>
+</div>
+
+<!-- ══ RESERVAS ══ -->
+<div id="panel-reservas" class="panel">
+  <div class="res-section">
+
+    <!-- LATAM -->
+    <div class="res-card">
+      <div class="res-header">
+        <div class="res-icon ri-latam">✈️</div>
+        <div><div class="res-title">LATAM Airlines</div><div class="res-sub">Voos ida e volta · 4 passageiros</div></div>
+        <div class="res-status">Confirmado</div>
+      </div>
+      <div class="res-body">
+        <div class="res-row"><div class="res-label">Reserva</div><div class="res-value">NFXJHR</div></div>
+        <div class="res-row"><div class="res-label">Ordem</div><div class="res-value">LA9578405PDVO</div></div>
+        <div class="res-row">
+          <div class="res-label">Ida · 24/09</div>
+          <div class="res-value">POA 10h00 → CGH 11h35<br><span style="font-size:9px;font-weight:400;color:#7A6E58">1h45 conexão → CGH 13h20 → CNF 14h35</span></div>
+        </div>
+        <div class="res-row">
+          <div class="res-label">Volta · 28/09</div>
+          <div class="res-value">CNF 16h20 → CGH 17h40<br><span style="font-size:9px;font-weight:400;color:#7A6E58">Conexão → CGH 19h10 → POA 20h50</span></div>
+        </div>
+        <div class="res-row"><div class="res-label">Passageiros</div><div class="res-value">Josiane · Eliete · Mara · Luis</div></div>
+        <div class="res-row"><div class="res-label">Tarifa</div><div class="res-value">Economy Light</div></div>
+        <div class="res-row"><div class="res-label">Bagagem</div><div class="res-value">1 mala mão 12kg + 1 item 10kg<br><span style="font-size:9px;color:#8B3A2A;font-weight:400">Sem bagagem despachada inclusa</span></div></div>
+        <div class="res-row"><div class="res-label">Contato</div><div class="res-value">4002-5700 (capitais)<br>0300 570 5700 (demais)</div></div>
+        <div class="res-alert">⚠️ Tarifa Light: remarcação permitida com multa antes do voo. Reembolso apenas das taxas de embarque. Voo de volta parte de Confins às 16h20 — sair de Ouro Preto às 12h30 no máximo.</div>
+      </div>
+    </div>
+
+    <!-- AIRBNB -->
+    <div class="res-card">
+      <div class="res-header">
+        <div class="res-icon ri-airbnb">🏠</div>
+        <div><div class="res-title">Airbnb — Ouro Preto</div><div class="res-sub">Maxi Conforto e Vista para o Itacolomi</div></div>
+        <div class="res-status">Confirmado</div>
+      </div>
+      <div class="res-body">
+        <div class="res-row"><div class="res-label">Confirmação</div><div class="res-value">HM9WA84K39</div></div>
+        <div class="res-row"><div class="res-label">Anfitriã</div><div class="res-value">Valdenize</div></div>
+        <div class="res-row"><div class="res-label">Endereço</div><div class="res-value">R. Maciel, 680<br>Ouro Preto, MG 35400-000</div></div>
+        <div class="res-row"><div class="res-label">Check-in</div><div class="res-value">Qui 24/09 · a partir das 15h<br><span style="font-size:9px;color:#8B3A2A;font-weight:400">Anfitrião recebe pessoalmente — avise Valdenize pelo app</span></div></div>
+        <div class="res-row"><div class="res-label">Checkout</div><div class="res-value">Seg 28/09 · até 12h</div></div>
+        <div class="res-row"><div class="res-label">Hóspedes</div><div class="res-value">4 adultos</div></div>
+        <div class="res-row"><div class="res-label">Valor pago</div><div class="res-value">R$ 1.264,50</div></div>
+        <div class="res-row"><div class="res-label">Wi-Fi</div><div class="res-value">Disponível 48h antes do check-in</div></div>
+        <div class="res-alert">Cancelamento gratuito antes das 15h do dia 19 de setembro. Após essa data, reembolso parcial se cancelar antes do check-in.</div>
+      </div>
+    </div>
+
+    <!-- CARRO -->
+    <div class="res-card">
+      <div class="res-header">
+        <div class="res-icon ri-car">🚗</div>
+        <div><div class="res-title">Localiza — Fiat Mobi 1.0</div><div class="res-sub">Aluguel 4 dias · Seguro incluído</div></div>
+        <div class="res-status">Confirmado</div>
+      </div>
+      <div class="res-body">
+        <div class="res-row"><div class="res-label">Referência</div><div class="res-value">RKV1QQ</div></div>
+        <div class="res-row"><div class="res-label">Localizador</div><div class="res-value">AV33ZZDF6A</div></div>
+        <div class="res-row"><div class="res-label">Titular</div><div class="res-value">Josiane Canfild</div></div>
+        <div class="res-row"><div class="res-label">Retirada</div><div class="res-value">24/09 · 14h30<br><span style="font-size:9px;color:#7A6E58;font-weight:400">Agência Confins — Aeroporto</span></div></div>
+        <div class="res-row"><div class="res-label">Devolução</div><div class="res-value">28/09 · 14h30<br><span style="font-size:9px;color:#7A6E58;font-weight:400">Ag. Pampulha · Av. Prof. Magalhães Penido, 269</span></div></div>
+        <div class="res-row"><div class="res-label">Carro</div><div class="res-value">Fiat Mobi 1.0 · Manual · 4 portas</div></div>
+        <div class="res-row"><div class="res-label">Km incluso</div><div class="res-value">200 km/dia</div></div>
+        <div class="res-row"><div class="res-label">Seguro</div><div class="res-value">✅ Proteção do carro + Cobertura terceiros</div></div>
+        <div class="res-row"><div class="res-label">Combustível</div><div class="res-value">Full-to-full — devolver cheio</div></div>
+        <div class="res-alert">⚠️ APENAS aceitos CNH e cartão de crédito FÍSICOS. Pré-autorização de R$700 no cartão. Emergências: 4003-1181 (7h-22h) ou WhatsApp +1 689 286 9153.</div>
+        <div class="res-alert red" style="margin-top:8px">🔴 Cancelamento NO SHOW = 100% das despesas. Cancelamento gratuito até 24/09 às 14h29.</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="bottom-safe"></div>
+</div>
+
+<!-- ══ INGRESSOS ══ -->
+<div id="panel-ingressos" class="panel">
+  <div class="ing-section">
+
+    <div class="cash-alert">
+      <div class="cash-icon">💵</div>
+      <div>
+        <div class="cash-title">Mina da Passagem: SÓ DINHEIRO!</div>
+        <div class="cash-text">Não aceitam Pix, cartão ou qualquer forma eletrônica. Traga ~R$600-720 em espécie para a Mina (2 inteiras + 2 meias 60+). Confirme o preço atual em mariana.minasdapassagem.com.br. Não há caixa eletrônico no local — saque em Ouro Preto antes de ir (sábado).</div>
+      </div>
+    </div>
+
+    <div class="ing-group-label">Sexta 25/09 — Centro Histórico</div>
+    <div class="ing-card">
+      <div class="ing-row">
+        <div class="ing-name">Basílica N.S. do Pilar</div>
+        <div class="ing-prices"><div class="ing-full">R$10/pessoa</div><div class="ing-half">Meia (60+): R$5 · Total 4 pax: R$30</div></div>
+      </div>
+      <div class="ing-row">
+        <div class="ing-name">Igreja São Francisco de Assis<small>+ Museu do Aleijadinho</small></div>
+        <div class="ing-prices"><div class="ing-full">R$8/pessoa</div><div class="ing-half">Meia (60+): R$4 · Total 4 pax: R$24</div></div>
+      </div>
+      <div class="ing-row">
+        <div class="ing-name">Igreja Santa Efigênia</div>
+        <div class="ing-prices"><div class="ing-full">R$5/pessoa</div><div class="ing-half">Meia (60+): R$2,50 · Total 4 pax: R$15</div></div>
+      </div>
+      <div class="ing-row">
+        <div class="ing-name">Museu Casa dos Contos</div>
+        <div class="ing-prices"><div class="ing-free">Gratuito</div></div>
+      </div>
+      <div class="ing-row">
+        <div class="ing-name">Museu da Inconfidência</div>
+        <div class="ing-prices"><div class="ing-free">Gratuito</div></div>
+      </div>
+      <div class="ing-row" style="background:#f5f2ea;border-radius:0 0 12px 12px;">
+        <div class="ing-name" style="font-weight:700">Subtotal sexta</div>
+        <div class="ing-prices"><div class="ing-full">R$69</div></div>
+      </div>
+    </div>
+
+    <div class="ing-group-label">Sábado 26/09 — Mariana</div>
+    <div class="ing-card">
+      <div class="ing-row">
+        <div class="ing-name">Mina da Passagem<small>💵 SÓ DINHEIRO · confirmar preço no site</small></div>
+        <div class="ing-prices"><div class="ing-full">~R$200-240/int.</div><div class="ing-half">Meia (60+): ~R$100-120 · Total 4 pax: ~R$600-720</div></div>
+      </div>
+      <div class="ing-row">
+        <div class="ing-name">Museu Arquidiocesano Arte Sacra<small>Rua Frei Durão, 49 · Mariana</small></div>
+        <div class="ing-prices"><div class="ing-full">R$15/pessoa</div><div class="ing-half">Meia (60+): R$7,50 · Total 4 pax: R$45</div></div>
+      </div>
+      <div class="ing-row">
+        <div class="ing-name">Mina Chico Rei<small>Rua Dom Silvério, 108 · Ouro Preto</small></div>
+        <div class="ing-prices"><div class="ing-full">~R$25-50/pessoa</div><div class="ing-half">Verificar meia 60+ no local · Total 4 pax: ~R$75-150</div></div>
+      </div>
+      <div class="ing-row">
+        <div class="ing-name">Centro de Mariana + Mirantes</div>
+        <div class="ing-prices"><div class="ing-free">Gratuito</div></div>
+      </div>
+      <div class="ing-row" style="background:#f5f2ea;border-radius:0 0 12px 12px;">
+        <div class="ing-name" style="font-weight:700">Subtotal sábado</div>
+        <div class="ing-prices"><div class="ing-full">~R$720-915 💵</div></div>
+      </div>
+    </div>
+
+    <div class="ing-group-label">Domingo 27/09</div>
+    <div class="ing-card">
+      <div class="ing-row">
+        <div class="ing-name">Museu do Oratório<small>Abre qua-seg · fechado terças</small></div>
+        <div class="ing-prices"><div class="ing-full">R$8/pessoa</div><div class="ing-half">Meia (60+): R$4 · Total 4 pax: R$24</div></div>
+      </div>
+      <div class="ing-row">
+        <div class="ing-name">Igreja do Rosário<small>Abre domingos 12h-15h30</small></div>
+        <div class="ing-prices"><div class="ing-free">Gratuito</div></div>
+      </div>
+      <div class="ing-row" style="background:#f5f2ea;border-radius:0 0 12px 12px;">
+        <div class="ing-name" style="font-weight:700">Subtotal domingo</div>
+        <div class="ing-prices"><div class="ing-full">R$24</div></div>
+      </div>
+    </div>
+
+    <div class="ing-total-card">
+      <div class="ing-total-label">Total estimado de ingressos · 4 pessoas</div>
+      <div class="ing-total-top">
+        <div class="ing-total-num">~R$870</div>
+        <div style="font-size:10px;color:rgba(240,234,214,0.4);text-align:right">a<br>R$1.080</div>
+      </div>
+      <div class="ing-total-note">⚠️ R$600-720 desse total precisa ser em dinheiro vivo (Mina da Passagem). Confirme o preço atual antes de viajar.</div>
+      <div class="ing-breakdown">
+        <div class="ing-br-row"><span class="ing-br-label">Basílica Pilar</span><span class="ing-br-val">R$30</span></div>
+        <div class="ing-br-row"><span class="ing-br-label">Igreja São Francisco</span><span class="ing-br-val">R$24</span></div>
+        <div class="ing-br-row"><span class="ing-br-label">Igreja Santa Efigênia</span><span class="ing-br-val">R$15</span></div>
+        <div class="ing-br-row"><span class="ing-br-label">Museu do Oratório</span><span class="ing-br-val">R$24</span></div>
+        <div class="ing-br-row"><span class="ing-br-label">Mina da Passagem 💵</span><span class="ing-br-val">~R$600-720</span></div>
+        <div class="ing-br-row"><span class="ing-br-label">Museu Arquidiocesano</span><span class="ing-br-val">R$45</span></div>
+        <div class="ing-br-row"><span class="ing-br-label">Mina Chico Rei</span><span class="ing-br-val">~R$75-150</span></div>
+        <div class="ing-br-row"><span class="ing-br-label">Gratuitos (7 atrações)</span><span class="ing-br-val">R$0</span></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="bottom-safe"></div>
+</div>
+
+<!-- ══ DICAS ══ -->
+<div id="panel-dicas" class="panel">
+  <div class="dicas-grid">
+
+    <div class="dica-card">
+      <div class="dica-head"><div class="dica-icon di-red">🚗</div><div><div class="dica-title">Fiat Mobi em Ouro Preto</div><div class="dica-sub">Ladeiras íngremes exigem atenção</div></div></div>
+      <ul class="dica-list">
+        <li>Nas subidas mais fortes, engate a 1ª marcha logo — não deixe o motor "miar" em 2ª com 4 pessoas</li>
+        <li>Ruas de Ouro Preto são estreitas e de mão única — use o GPS e não improvise atalhos</li>
+        <li>Não estacione em ladeira sem travar o freio de mão + deixar em marcha ré (ou 1ª se for subida)</li>
+        <li>Para os mirantes íngremes (São Sebastião), reduza bem a velocidade na descida — use o freio motor</li>
+        <li>Mobi é pequeno e ágil — boa vantagem nas ruas estreitas do centro histórico</li>
+      </ul>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-head"><div class="dica-icon di-blue">🅿️</div><div><div class="dica-title">Estacionamento em Ouro Preto</div><div class="dica-sub">Estratégia por cluster</div></div></div>
+      <ul class="dica-list">
+        <li><strong>Baixe antes:</strong> app "Rotativo Ouro Preto" para pagar a Zona Azul sem precisar de ficha</li>
+        <li><strong>Cluster manhã (Pilar/São Francisco):</strong> estacione na área das Jardineiras, perto da Basílica do Pilar</li>
+        <li><strong>Cluster tarde (Praça Tiradentes):</strong> mova o carro para a Rua Direita ou Rua Senador Rocha Lagoa — estacionamentos particulares têm vagas mais garantidas</li>
+        <li><strong>Mirante São Sebastião:</strong> suba e estacione no próprio platô (chega antes do anoitecer)</li>
+        <li><strong>Museu do Oratório:</strong> estacione no Adro da Igreja do Carmo, zona central</li>
+        <li><strong>Mina da Passagem:</strong> estacionamento próprio gratuito</li>
+        <li><strong>Mariana:</strong> muito mais tranquila que OP — estacione próximo à Praça Minas Gerais</li>
+      </ul>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-head"><div class="dica-icon di-gold">💵</div><div><div class="dica-title">Dinheiro em Espécie</div><div class="dica-sub">Essencial para a viagem</div></div></div>
+      <ul class="dica-list">
+        <li>Mina da Passagem: SÓ DINHEIRO (~R$600-720). Saque em Ouro Preto antes de ir no sábado de manhã</li>
+        <li>Igrejas: algumas não têm maquininha — tenha pelo menos R$100 em espécie separado para as igrejas</li>
+        <li>Aqui Di Minas: aceita cartão, mas dinheiro facilita compras rápidas</li>
+        <li>Caixas eletrônicos no centro de Ouro Preto — não há na Mina da Passagem nem em Mariana centro</li>
+        <li>Saque com antecedência — fins de semana as filas nos bancos de OP podem ser grandes</li>
+      </ul>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-head"><div class="dica-icon di-red">⚠️</div><div><div class="dica-title">Horários — Atenção especial</div><div class="dica-sub">Fechamentos que podem surpreender</div></div></div>
+      <ul class="dica-list">
+        <li>Basílica do Pilar: fecha 11h-12h para almoço — chegue antes das 11h ou depois das 12h</li>
+        <li>Igreja do Rosário (OP): abre 12h. Domingos: 12h às 15h30 apenas</li>
+        <li>Museu Casa dos Contos: fechado aos domingos (seg-sáb 10h-16h)</li>
+        <li>Museu do Oratório: fechado às terças (funciona qua-seg 9h30-17h30)</li>
+        <li>Igreja da Conceição: pode estar em obras — ligue antes: (31) 3551-4661</li>
+        <li>Mina da Passagem aos sábados: filas comuns — chegue às 9h na abertura</li>
+      </ul>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-head"><div class="dica-icon di-green">👣</div><div><div class="dica-title">Conforto para os Pais (60+)</div><div class="dica-sub">Aproveitar sem se cansar</div></div></div>
+      <ul class="dica-list">
+        <li>Use o carro para chegar o mais perto possível de cada atração — não economize nos deslocamentos</li>
+        <li>Calçado com solado antiderrapante: o paralelepípedo de Ouro Preto fica escorregadio quando molhado</li>
+        <li>Setembro pode ter chuva à tarde — tenha um guarda-chuva compacto na bolsa</li>
+        <li>Museu do Oratório e Museu da Inconfidência: sem ladeiras, climatizados — ótimos para descanso</li>
+        <li>Mariana é bem mais plana que Ouro Preto — ideal para caminhar sem esforço</li>
+        <li>Reserve tempo para cafés e pausas entre atrações — a viagem é mais prazerosa com esse ritmo</li>
+        <li>Meia-entrada garantida com documento de identidade com data de nascimento (60+)</li>
+      </ul>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-head"><div class="dica-icon di-gold">🍽️</div><div><div class="dica-title">Gastronomia Mineira</div><div class="dica-sub">Não saia de Minas sem provar</div></div></div>
+      <ul class="dica-list">
+        <li>🫘 Feijão-tropeiro — prato mais típico de Minas, presença obrigatória</li>
+        <li>🍗 Frango com quiabo — clássico que está em todo restaurante mineiro</li>
+        <li>🫘 Tutu à mineira — feijão cremoso servido com couve e torresmo</li>
+        <li>🧀 Pão de queijo fresquinho pela manhã — melhor café da manhã possível</li>
+        <li>🧀 Queijo Canastra — comprar na Aqui Di Minas na segunda antes de partir</li>
+        <li>🍮 Doce de leite artesanal — diferente de qualquer outro que já comeram</li>
+      </ul>
+    </div>
+
+    <div class="dica-card">
+      <div class="dica-head"><div class="dica-icon di-stone">🌅</div><div><div class="dica-title">Os 3 Pôres do Sol</div><div class="dica-sub">Um por dia — cada um diferente</div></div></div>
+      <ul class="dica-list">
+        <li>🌅 Sexta · Mirante Morro São Sebastião — o mais famoso, cidade inteira aos pés (subir de carro)</li>
+        <li>🌅 Sábado · Mirante das Lajes — na volta de Mariana, parada espontânea na Rua Conselheiro Quintiliano</li>
+        <li>🌅 Domingo · Mirante das Mercês — 5 min do centro, acessível de carro, encerra a última tarde</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="bottom-safe"></div>
+</div>
+
+<!-- ══ CHECKLIST ══ -->
+<div id="panel-checklist" class="panel">
+  <div class="check-section">
+
+    <div class="check-card">
+      <div class="check-title">🔴 Fazer Agora — Urgente</div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Confirmar preço atual da Mina da Passagem<small>mariana.minasdapassagem.com.br — preço só na bilheteria, confirmar por email</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Verificar se Igreja da Conceição está aberta<small>Pode estar em obras: (31) 3551-4661</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Baixar app "Rotativo Ouro Preto"<small>Para pagar estacionamento na Zona Azul sem ficha</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Avisar Valdenize (Airbnb) horário de chegada<small>Ela recebe pessoalmente — avise pelo app quando sair de Confins</small></div></div>
+    </div>
+
+    <div class="check-card">
+      <div class="check-title">🟡 Antes de Embarcar em POA</div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Levar CNH física (original)<small>Obrigatório na Localiza — sem ela não entregam o carro</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Levar cartão de crédito físico (Josiane)<small>O mesmo cartão usado na reserva — pré-autorização R$700</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Separar dinheiro em espécie para a Mina da Passagem<small>~R$600-720 para 4 pessoas (confirmar valor atual)</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Documentos com data de nascimento para os pais<small>Para comprovar meia-entrada 60+ em todas as atrações</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Calçado antiderrapante para todos<small>Paralelepípedo de Ouro Preto fica escorregadio — nada de solado liso</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Guarda-chuva compacto<small>Setembro pode ter chuvas à tarde em Minas</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">GPS do celular com dados ou offline<small>Baixar região de Ouro Preto offline no Google Maps</small></div></div>
+    </div>
+
+    <div class="check-card">
+      <div class="check-title">🟢 No Sábado 26/09 (antes de ir para Mariana)</div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Sacar dinheiro para a Mina da Passagem<small>Caixas eletrônicos no centro de Ouro Preto — antes de sair para Mariana</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Chegar na Mina da Passagem às 9h (abertura)<small>Sábados têm filas — chegar na abertura evita espera longa</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Chegar na Mina Chico Rei até 16h15<small>Fecha às 17h — chegue com tempo para a visita de 40 min</small></div></div>
+    </div>
+
+    <div class="check-card">
+      <div class="check-title">✈ Segunda 28/09 — Retorno</div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Checkout até 12h com Valdenize<small>Confirme no app Airbnb com antecedência</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Abastecer carro antes de devolver<small>Política full-to-full — devolver cheio para não pagar taxa da Localiza</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Sair de Ouro Preto às 12h30 no máximo<small>Devolução às 14h30 + Uber para Confins + check-in voo 16h20</small></div></div>
+      <div class="check-item" onclick="chk(this)"><div class="check-box"></div><div class="check-text">Checar embalagem de compras da Aqui Di Minas<small>Líquidos (cachaça): máx 100ml na mala de mão. Queijos e doces: OK</small></div></div>
+    </div>
+
+  </div>
+  <div class="bottom-safe"></div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleDay(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function chk(el) {
+  el.classList.toggle('done');
+  el.querySelector('.check-box').textContent = el.classList.contains('done') ? '✓' : '';
+  save();
+}
+
+function save() {
+  const st = [];
+  document.querySelectorAll('.check-item').forEach((el,i) => st.push(el.classList.contains('done')));
+  try { localStorage.setItem('op26_cl', JSON.stringify(st)); } catch(e){}
+}
+
+function loadChecklist() {
+  try {
+    const st = JSON.parse(localStorage.getItem('op26_cl') || '[]');
+    document.querySelectorAll('.check-item').forEach((el,i) => {
+      if (st[i]) { el.classList.add('done'); el.querySelector('.check-box').textContent = '✓'; }
+    });
+  } catch(e){}
+}
+
+loadChecklist();
+</script>
+</body>
+</html>
